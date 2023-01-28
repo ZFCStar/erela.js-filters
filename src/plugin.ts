@@ -17,6 +17,7 @@ export class customFilter extends Plugin {
                     private _karaoke: boolean = false;
                     private _vibrato: boolean = false;
                     private _tremolo: boolean = false;
+                    private _daycore: boolean = false;
 
                     //Private Filter Data
                     private readonly _resetData = {
@@ -33,6 +34,16 @@ export class customFilter extends Plugin {
                             rate: 1,
                         },
                     };
+
+                    private readonly _daycoreData = {
+                        op: "filters",
+                        guildId: this.guild,
+                        timescale: {
+                            speed: -1.2999999523162842,
+                            pitch: -1.2999999523162842,
+                            rate: 1,
+                        },
+                    }; 
 
                     private readonly _vaporwaveData = {
                         op: "filters",
@@ -166,6 +177,7 @@ export class customFilter extends Plugin {
                             this._karaoke = false;
                             this._vibrato = false;
                             this._tremolo = false;
+                            this._daycore = false;
                             this.node.send(this._nightcoreData);
                         } else this._resetnode();
                     }
@@ -176,6 +188,7 @@ export class customFilter extends Plugin {
                             this._bassboost = false;
                             this._nightcore = false;
                             this._soft = false;
+                            this._daycore = false;
                             this._pop = false;
                             this._treblebass = false;
                             this._eightD = false;
@@ -193,6 +206,7 @@ export class customFilter extends Plugin {
                             this._vaporwave = false;
                             this._soft = false;
                             this._pop = false;
+                            this._daycore = false;
                             this._treblebass = false;
                             this._eightD = false;
                             this._karaoke = false;
@@ -209,6 +223,7 @@ export class customFilter extends Plugin {
                             this._vaporwave = false;
                             this._bassboost = false;
                             this._soft = false;
+                            this._daycore = false;
                             this._treblebass = false;
                             this._eightD = false;
                             this._karaoke = false;
@@ -224,6 +239,7 @@ export class customFilter extends Plugin {
                             this._nightcore = false;
                             this._vaporwave = false;
                             this._bassboost = false;
+                            this._daycore = false;
                             this._pop = false;
                             this._treblebass = false;
                             this._eightD = false;
@@ -241,6 +257,7 @@ export class customFilter extends Plugin {
                             this._vaporwave = false;
                             this._bassboost = false;
                             this._pop = false;
+                            this._daycore = false;
                             this._soft = false;
                             this._eightD = false;
                             this._karaoke = false;
@@ -257,6 +274,7 @@ export class customFilter extends Plugin {
                             this._vaporwave = false;
                             this._bassboost = false;
                             this._pop = false;
+                            this._daycore = false;
                             this._soft = false;
                             this._treblebass = false;
                             this._karaoke = false;
@@ -272,6 +290,7 @@ export class customFilter extends Plugin {
                             this._nightcore = false;
                             this._vaporwave = false;
                             this._bassboost = false;
+                            this._daycore = false;
                             this._pop = false;
                             this._soft = false;
                             this._treblebass = false;
@@ -293,6 +312,7 @@ export class customFilter extends Plugin {
                             this._treblebass = false;
                             this._eightD = false;
                             this._karaoke = false;
+                            this._daycore = false;
                             this._tremolo = false;
                             this.node.send(this._vibratoData)
                         } else this._resetnode();
@@ -306,11 +326,29 @@ export class customFilter extends Plugin {
                             this._bassboost = false;
                             this._pop = false;
                             this._soft = false;
+                            this._daycore = false;
                             this._treblebass = false;
                             this._eightD = false;
                             this._karaoke = false;
                             this._vibrato = false;
                             this.node.send(this._tremoloData)
+                        } else this._resetnode();
+                    }
+
+                    set daycore(status:boolean){
+                        this._tremolo = status;
+                        if(status){
+                            this._nightcore = false;
+                            this._vaporwave = false;
+                            this._bassboost = false;
+                            this._pop = false;
+                            this._soft = false;
+                            this._daycore = status;
+                            this._treblebass = false;
+                            this._eightD = false;
+                            this._karaoke = false;
+                            this._vibrato = false;
+                            this.node.send(this._daycoreData)
                         } else this._resetnode();
                     }
 
@@ -355,6 +393,10 @@ export class customFilter extends Plugin {
                         return this._tremolo;
                     }
 
+                    get daycore(){
+                        return this._daycore;
+                    }
+
                     //Reset Everything
                     private _resetnode() {
                         this.node.send(this._resetData);
@@ -372,6 +414,7 @@ export class customFilter extends Plugin {
                         this._karaoke = false;
                         this._vibrato = false;
                         this._tremolo = false;
+                        this._daycore = fasle;
                     }
                 }
         );
